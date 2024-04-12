@@ -26,9 +26,36 @@ function authFail(res, callbak) {
 };
 
 // Create a JWT
-function generateToken(req){
+function generateToken(req, GUID, opts){
     // By default, the token will expire in 7 days
     // The value of 'exp' needs to be in seconds
+    opts = opts || {}
+
+    let expireDefault = '7d'
+
+    const token = jwt.sign({
+        auth: GUID,
+        agent: req.headers['user-agent']
+    }, secret, {expiresIn: opts.expires || expireDefault});
+
+    return token 
+};
+
+// Store token
+function generateAndStoreToken(req, opts) {
+    const GUID = generateGUID();
+
+    const token = generateToken(req, GUID, opts);
+
+    let record = {
+        'valid': true,
+        'created': new Date().getTime()
+    }
+
+    db.put(GUID, JSON.stringify(record), function(err){
+        console.log(record)
+    })
+    return token
 };
 
 // Generate a GUID
