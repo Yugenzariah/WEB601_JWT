@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Yugenzariah/WEB601_JWT/issues"
   },
-  "homepage": "https://github.com/Yugenzariah/WEB601_JWT#readme"
+  "homepage": "https://github.com/Yugenzariah/WEB601_JWT#readme",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "level": "^8.0.1"
+  }
 }
