@@ -30,3 +30,8 @@ function generateToken(req){
     // By default, the token will expire in 7 days
     // The value of 'exp' needs to be in seconds
 };
+
+// Generate a GUID
+function generateGUID() {
+    return new Date().getTime() 
+};
