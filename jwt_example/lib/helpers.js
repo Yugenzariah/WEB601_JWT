@@ -58,6 +58,26 @@ function generateAndStoreToken(req, opts) {
     return token
 };
 
+// Success in Auth
+function authSuccess (req, res) {
+    const token = generateAndStoreToken(req);
+
+    res.writeHead(200, {
+        'content-type': 'text/html',
+        'authorization': token
+    })
+    return res.end(restricted)
+}
+
+// lookup a person in the database
+let person = {un: username, pw: 'password'}
+
+// Not found page
+function notFound(res) {
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+    return res.end(index);
+}
+
 // Generate a GUID
 function generateGUID() {
     return new Date().getTime() 
